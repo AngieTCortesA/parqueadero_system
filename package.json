@@ -1,0 +1,29 @@
+{
+  "name": "parqueadero-system",
+  "version": "1.0.0",
+  "description": "Sistema desarrollado para el área de admiinistración de 3Shape, donde se gestionan los cupos del parqueadero privado de la empresa, para controlar el flujo de usuarios y llevar un orden y registro de los \r vehículos que ingresan. Desarrollado utilizando PHP, MySQL, Railway y Render.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-tailwind": "npx tailwindcss -i tailwind.css -o styles.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/killiam19/parqueadero-system.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/killiam19/parqueadero-system/issues"
+  },
+  "homepage": "https://github.com/killiam19/parqueadero-system#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  },
+  "dependencies": {
+    "@preline/toggle-password": "^3.2.3",
+    "preline": "^3.2.3",
+    "sweetalert2": "^11.22.4"
+  }
+}

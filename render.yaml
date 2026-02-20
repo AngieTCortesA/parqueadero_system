@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: parqueadero-system
+    env: debian
+    plan: free
+    buildCommand: ./build.sh
+    startCommand: apache2-foreground
