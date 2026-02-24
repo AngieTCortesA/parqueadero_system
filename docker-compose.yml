@@ -7,13 +7,12 @@ services:
       - "8080:80"
     depends_on:
       - db
-    volumes:
-      - ./public:/var/www/html
     environment:
-      - MYSQL_HOST=db
-      - MYSQL_USER=root
-      - MYSQL_PASSWORD=root
-      - MYSQL_DATABASE=parqueadero_system
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_NAME: parqueadero_system
+      DB_USER: root
+      DB_PASS: root
 
   db:
     image: mysql:5.7

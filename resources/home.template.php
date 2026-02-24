@@ -127,6 +127,15 @@
     gap: 10px;
 }
 
+.mapa-titulo {
+    display: block;              
+    text-align: center;          
+    font-weight: 700;
+    font-size: 1rem;
+    color: #374151;            
+    padding: 10px 0; 
+}
+
 /* Estilos para mensajes de validación */
 .mensaje {
   padding: 1rem;
@@ -428,7 +437,7 @@
                     </div>
                     <?php endif; ?>
                     
-                    <div id="mapa-carro" style="display:block;">
+            <div id="mapa-carro" style="display:block;">
                 <div class="mapa-titulo" style="justify-content: flex-start;">
                     <span style="color:#2563eb;font-size:2.2rem;">&#128205;</span>
                     Mapa de Espacios de Parqueadero (Carros)-Disponibilidad para la fecha seleccionada
@@ -439,25 +448,28 @@
                     <span><span style="display:inline-block;width:18px;height:18px;background:#2563eb;border-radius:4px;"></span> Seleccionado</span>
                 </div>
                 <div class="mapa-espacios-bg" style="width: 100%; max-width: 900px; margin: 0 auto;">
-                    <div id="mapa-espacios-carro">
-                        <?php for ($i = 281; $i >= 273; $i--): ?>
-                            <?php
-                                $estado = 'disponible';
-                                if (isset($ocupados_map[$i])) {
-                                    if ($ocupados_map[$i] == $_SESSION['usuario_id']) {
-                                        $estado = 'seleccionado';
-                                    } else {
-                                        $estado = 'ocupado';
+                    <div id="mapa-carros-grid" style="display: flex; flex-direction: column; align-items: center;">
+                        <a class="mapa-titulo">Parqueadero tercer piso</a>
+                        <div id="mapa-espacios-carro">
+                            <?php for ($i = 281; $i >= 273; $i--): ?>
+                                <?php
+                                    $estado = 'disponible';
+                                    if (isset($ocupados_map[$i])) {
+                                        if ($ocupados_map[$i] == $_SESSION['usuario_id']) {
+                                            $estado = 'seleccionado';
+                                        } else {
+                                            $estado = 'ocupado';
+                                        }
                                     }
-                                }
-                            ?>
-                            <button type="button" class="espacio-btn <?php echo $estado; ?>" data-espacio="<?php echo $i; ?>" data-tipo="carro" <?php echo ($estado=='ocupado'?'disabled':''); ?>
-                            <?php if($estado=='seleccionado'): ?> style="background:#2563eb;color:#fff;border:2px solid #2563eb;box-shadow:0 0 0 4px #2563eb33;"<?php endif; ?>
-                            >
-                                <span class="icono-auto"><i class="fa-solid fa-car-side"></i></span>
-                                <span><?php echo $i; ?></span>
-                            </button>
-                        <?php endfor; ?>
+                                ?>
+                                <button type="button" class="espacio-btn <?php echo $estado; ?>" data-espacio="<?php echo $i; ?>" data-tipo="carro" <?php echo ($estado=='ocupado'?'disabled':''); ?>
+                                <?php if($estado=='seleccionado'): ?> style="background:#2563eb;color:#fff;border:2px solid #2563eb;box-shadow:0 0 0 4px #2563eb33;"<?php endif; ?>
+                                >
+                                    <span class="icono-auto"><i class="fa-solid fa-car-side"></i></span>
+                                    <span><?php echo $i; ?></span>
+                                </button>
+                            <?php endfor; ?>
+                        </div>
                     </div>
                 </div>
                 <div id="ayuda-espacio-carro" style="font-size: 13px; color: #888; margin-top: 3px; text-align:center;">Selecciona un espacio disponible (verde).</div>
@@ -472,129 +484,103 @@
                     <span><span style="display:inline-block;width:18px;height:18px;background:#f6e6ea;border-radius:4px;"></span> Lleno</span>
                     <span><span style="display:inline-block;width:18px;height:18px;background:#2563eb;border-radius:4px;"></span> Seleccionado</span>
                 </div>
-                <div class="mapa-espacios-bg" style="width: 100%; max-width: 900px; margin: 0 auto;">
-                    <div id="mapa-motos-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; justify-items: center;">
-                        <!-- Columna 1 -->
-                        <?php
-                            $id = 474;
-                            $ocupados = $moto_ocupados[$id] ?? 0;
-                            $max = 7;
-                            $estado = ($ocupados >= $max) ? 'ocupado' : 'disponible';
-                            $info = "$ocupados/$max cupos reservados";
-                        ?>
-                        <button type="button" class="espacio-btn moto-btn <?php echo $estado; ?>" data-espacio="474" data-tipo="moto" data-cupos="<?php echo $info; ?>" <?php echo ($estado=='ocupado'?'disabled':''); ?> style="position:relative;">
-                            <span class="icono-auto"><i class="fa-solid fa-motorcycle"></i></span>
-                            <span>474</span>
-                            <span class="tooltip-cupos"><?php echo $info; ?></span>
-                        </button>
-                    
-                        <!-- Columna 2 -->
-                        <?php
-                            $id = 475;
-                            $ocupados = $moto_ocupados[$id] ?? 0;
-                            $max = 7;
-                            $estado = ($ocupados >= $max) ? 'ocupado' : 'disponible';
-                            $info = "$ocupados/$max cupos reservados";
-                        ?>
-                        <button type="button" class="espacio-btn moto-btn <?php echo $estado; ?>" data-espacio="475" data-tipo="moto" data-cupos="<?php echo $info; ?>" <?php echo ($estado=='ocupado'?'disabled':''); ?> style="position:relative;">
-                            <span class="icono-auto"><i class="fa-solid fa-motorcycle"></i></span>
-                            <span>475</span>
-                            <span class="tooltip-cupos"><?php echo $info; ?></span>
-                        </button>
-                        <!-- Columna 3 -->
-                        <?php
-                            $id = 476;
-                            $ocupados = $moto_ocupados[$id] ?? 0;
-                            $max = 7;
-                            $estado = ($ocupados >= $max) ? 'ocupado' : 'disponible';
-                            $info = "$ocupados/$max cupos reservados";
-                        ?>
-                        <button type="button" class="espacio-btn moto-btn <?php echo $estado; ?>" data-espacio="476" data-tipo="moto" data-cupos="<?php echo $info; ?>" <?php echo ($estado=='ocupado'?'disabled':''); ?> style="position:relative;">
-                            <span class="icono-auto"><i class="fa-solid fa-motorcycle"></i></span>
-                            <span>476</span>
-                            <span class="tooltip-cupos"><?php echo $info; ?></span>
-                        </button>
-                        
-                        <?php
-                            $id = 441;
-                            $ocupados = $moto_ocupados[$id] ?? 0;
-                            $max = 5;
-                            $estado = ($ocupados >= $max) ? 'ocupado' : 'disponible';
-                            $info = "$ocupados/$max cupos reservados";
-                        ?>
-                        <button type="button" class="espacio-btn moto-btn <?php echo $estado; ?>" data-espacio="441" data-tipo="moto" data-cupos="<?php echo $info; ?>" <?php echo ($estado=='ocupado'?'disabled':''); ?> style="position:relative;">
-                            <span class="icono-auto"><i class="fa-solid fa-motorcycle"></i></span>
-                            <span>441</span>
-                            <span class="tooltip-cupos"><?php echo $info; ?></span>
-                        </button>  
-                        
-                        <?php
-                            $id = '001';
-                            $ocupados = $moto_ocupados[$id] ?? 0;
-                            $max = 5;
-                            $estado = ($ocupados >= $max) ? 'ocupado' : 'disponible';
-                            $info = "$ocupados/$max cupos reservados";
-                        ?>
-                        <button type="button" class="espacio-btn moto-btn <?php echo $estado; ?>" data-espacio="001" data-tipo="moto" data-cupos="<?php echo $info; ?>" <?php echo ($estado=='ocupado'?'disabled':''); ?> style="position:relative;">
-                            <span class="icono-auto"><i class="fa-solid fa-motorcycle"></i></span>
-                            <span>001</span>
-                            <span class="tooltip-cupos"><?php echo $info; ?></span>
-                        </button>
+                <div class="mapa-espacios-bg" style="width: 100%; max-width: 800px; margin: 0 auto;">
+                   <div id="mapa-motos-grid" style="display: flex; flex-direction: column; align-items: center; gap: 21px;">
+                        <div style="background: rgba(0, 0, 0, 0.02); width: 80%; border-radius: 18px; padding: 18px 80px; display: inline-block;">
+                            <a class="mapa-titulo">Parqueadero tercer piso</a>
+                            <div style="display: flex; gap: 83px; margin-bottom: 10px;">
+                                <?php foreach ([474, 475, 476] as $id): ?>
+                                    <?php
+                                        $ocupados = $moto_ocupados[$id] ?? 0;
+                                        $max = 7;
+                                        $estado = ($ocupados >= $max) ? 'ocupado' : 'disponible';
+                                        $info = "$ocupados/$max cupos reservados";
+                                    ?>
+                                    <button type="button" class="espacio-btn moto-btn <?= $estado ?>" data-espacio="<?= $id ?>" data-tipo="moto" data-cupos="<?= $info ?>" <?= ($estado=='ocupado'?'disabled':'') ?> style="position:relative;">
+                                        <span class="icono-auto"><i class="fa-solid fa-motorcycle"></i></span>
+                                        <span><?= $id ?></span>
+                                        <span class="tooltip-cupos"><?= $info ?></span>
+                                    </button>
+                                <?php endforeach; ?>
+                            </div>
+                            <!-- Fila inferior: solo 441 (alineado a la izquierda) -->
+                            <div style="display: flex; gap: 10px;">
+                                <?php
+                                    $id = 441; $ocupados = $moto_ocupados[$id] ?? 0; $max = 5;
+                                    $estado = ($ocupados >= $max) ? 'ocupado' : 'disponible';
+                                    $info = "$ocupados/$max cupos reservados";
+                                ?>
+                                <button type="button" class="espacio-btn moto-btn <?= $estado ?>" data-espacio="<?= $id ?>" data-tipo="moto" data-cupos="<?= $info ?>" <?= ($estado=='ocupado'?'disabled':'') ?> style="position:relative;">
+                                    <span class="icono-auto"><i class="fa-solid fa-motorcycle"></i></span>
+                                    <span><?= $id ?></span>
+                                    <span class="tooltip-cupos"><?= $info ?></span>
+                                </button>
+                            </div>
+                        </div>
 
-                        <?php
-                            $id = '002';
-                            $ocupados = $moto_ocupados[$id] ?? 0;
-                            $max = 5;
-                            $estado = ($ocupados >= $max) ? 'ocupado' : 'disponible';
-                            $info = "$ocupados/$max cupos reservados";
-                        ?>
-                        <button type="button" class="espacio-btn moto-btn <?php echo $estado; ?>" data-espacio="002" data-tipo="moto" data-cupos="<?php echo $info; ?>" <?php echo ($estado=='ocupado'?'disabled':''); ?> style="position:relative;">
-                            <span class="icono-auto"><i class="fa-solid fa-motorcycle"></i></span>
-                            <span>002</span>
-                            <span class="tooltip-cupos"><?php echo $info; ?></span>
-                        </button>
-                        
-                    </div>
+                        <!-- Contenedor 001 y 002 -->
+                        <div style="background: rgba(0,0,0,0.02); width: 80%; border-radius: 18px; padding: 18px 80px; display: inline-block;">
+                            <a class="mapa-titulo">Parqueadero segundo piso</a>
+                            <div style="display: flex; gap: 83px;">
+                                <?php foreach (['001' => 5, '002' => 5] as $id => $max): ?>
+                                    <?php
+                                        $ocupados = $moto_ocupados[$id] ?? 0;
+                                        $estado = ($ocupados >= $max) ? 'ocupado' : 'disponible';
+                                        $info = "$ocupados/$max cupos reservados";
+                                    ?>
+                                    <button type="button" class="espacio-btn moto-btn <?= $estado ?>" data-espacio="<?= $id ?>" data-tipo="moto" data-cupos="<?= $info ?>" <?= ($estado=='ocupado'?'disabled':'') ?> style="position:relative;">
+                                        <span class="icono-auto"><i class="fa-solid fa-motorcycle"></i></span>
+                                        <span><?= $id ?></span>
+                                        <span class="tooltip-cupos"><?= $info ?></span>
+                                    </button>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+
+                    </div> 
                 </div>
                 <div id="ayuda-espacio-moto" style="font-size: 13px; color: #888; margin-top: 3px; text-align:center;">Selecciona un espacio disponible (verde). Pasa el mouse para ver los cupos ocupados.</div>
             </div>
 
-<div id="mapa-moto-grande" style="display:none;">
-    <div class="mapa-titulo" style="justify-content: flex-start;">
-        <span style="color:#2563eb;font-size:2.2rem;">&#128205;</span>
-        Mapa de Espacios de Parqueadero (Motos de Alto Cilindraje)-Disponibilidad para la fecha seleccionada
-    </div>
-    <div class="mapa-leyenda" style="justify-content: flex-start;">
-        <span><span style="display:inline-block;width:18px;height:18px;background:#22c55e;border-radius:4px;"></span> Disponible</span>
-        <span><span style="display:inline-block;width:18px;height:18px;background:#f6e6ea;border-radius:4px;"></span> Ocupado</span>
-        <span><span style="display:inline-block;width:18px;height:18px;background:#2563eb;border-radius:4px;"></span> Seleccionado</span>
-    </div>
-    <div class="mapa-espacios-bg" style="width: 100%; max-width: 900px; margin: 0 auto;">
-        <div id="mapa-espacios-moto-grande" style="display: flex; justify-content: center; gap: 10px;">
-            <?php for ($i = 272; $i >= 270; $i--): ?>
-                <?php
-                    $estado = 'disponible';
-                    if (isset($moto_grande_ocupados_map[$i])) {
-                        if ($moto_grande_ocupados_map[$i] == $_SESSION['usuario_id']) {
-                            $estado = 'seleccionado';
-                        } else {
-                            $estado = 'ocupado';
-                        }
-                    }
-                    $info_mg = "0/2 cupos reservados";
-                ?>
-                <button type="button" class="espacio-btn moto-grande-btn <?php echo $estado; ?>" data-espacio="<?php echo $i; ?>" data-tipo="moto_grande" data-cupos="<?php echo $info_mg; ?>" <?php echo ($estado=='ocupado'?'disabled':''); ?>
-                <?php if($estado=='seleccionado'): ?> style="position:relative;background:#2563eb;color:#fff;border:2px solid #2563eb;box-shadow:0 0 0 4px #2563eb33;"<?php else: ?> style="position:relative;"<?php endif; ?>
-                >
-                    <span class="icono-auto"><i class="fa-solid fa-motorcycle"></i></span>
-                    <span><?php echo $i; ?></span>
-                    <span class="tooltip-cupos"><?php echo $info_mg; ?></span>
-                </button>
-            <?php endfor; ?>
-        </div>
-    </div>
-    <div id="ayuda-espacio-moto-grande" style="font-size: 13px; color: #888; margin-top: 3px; text-align:center;">Selecciona un espacio disponible (verde) para motos de alto cilindraje, es decir, de un mayor tamaño.</div>
-</div>
+            <div id="mapa-moto-grande" style="display:none;">
+                <div class="mapa-titulo" style="justify-content: flex-start;">
+                    <span style="color:#2563eb;font-size:2.2rem;">&#128205;</span>
+                    Mapa de Espacios de Parqueadero (Motos de Alto Cilindraje)-Disponibilidad para la fecha seleccionada
+                </div>
+                <div class="mapa-leyenda" style="justify-content: flex-start;">
+                    <span><span style="display:inline-block;width:18px;height:18px;background:#22c55e;border-radius:4px;"></span> Disponible</span>
+                    <span><span style="display:inline-block;width:18px;height:18px;background:#f6e6ea;border-radius:4px;"></span> Ocupado</span>
+                    <span><span style="display:inline-block;width:18px;height:18px;background:#2563eb;border-radius:4px;"></span> Seleccionado</span>
+                </div>
+                <div class="mapa-espacios-bg" style="width: 100%; max-width: 900px; margin: 0 auto;">
+                    <div id="mapa-moto-grande-grid" style="display: flex; flex-direction: column; align-items: center;">
+                        <a class="mapa-titulo">Parqueadero tercer piso</a> 
+                        <div id="mapa-espacios-carro">
+                            <?php for ($i = 272; $i >= 270; $i--): ?>
+                                <?php
+                                    $estado = 'disponible';
+                                    if (isset($moto_grande_ocupados_map[$i])) {
+                                        if ($moto_grande_ocupados_map[$i] == $_SESSION['usuario_id']) {
+                                            $estado = 'seleccionado';
+                                        } else {
+                                            $estado = 'ocupado';
+                                        }
+                                    }
+                                    $info_mg = "0/2 cupos reservados";
+                                ?>
+                                <button type="button" class="espacio-btn moto-grande-btn <?php echo $estado; ?>" data-espacio="<?php echo $i; ?>" data-tipo="moto_grande" data-cupos="<?php echo $info_mg; ?>" <?php echo ($estado=='ocupado'?'disabled':''); ?>
+                                <?php if($estado=='seleccionado'): ?> style="position:relative;background:#2563eb;color:#fff;border:2px solid #2563eb;box-shadow:0 0 0 4px #2563eb33;"<?php else: ?> style="position:relative;"<?php endif; ?>
+                                >
+                                    <span class="icono-auto"><i class="fa-solid fa-motorcycle"></i></span>
+                                    <span><?php echo $i; ?></span>
+                                    <span class="tooltip-cupos"><?php echo $info_mg; ?></span>
+                                </button>
+                            <?php endfor; ?>
+                        </div>
+                    </div>
+                </div>
+                <div id="ayuda-espacio-moto-grande" style="font-size: 13px; color: #888; margin-top: 3px; text-align:center;">Selecciona un espacio disponible (verde) para motos de alto cilindraje, es decir, de un mayor tamaño.</div>
+            </div>
                     </div>
 
                     <div id="formulario-reserva" class="card form-reserva-oculto">
