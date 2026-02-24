@@ -255,7 +255,7 @@ class AdminController
             FROM usuarios u
             LEFT JOIN reservas r ON r.usuario_id = u.id
             GROUP BY u.id
-            ORDER BY U.fecha_registro DESc
+            ORDER BY u.fecha_registro DESC
         ")->get();
     }
 
