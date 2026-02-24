@@ -11,16 +11,18 @@ class Database
 
     public function __construct()
     {
-        $dsn = sprintf(
-            'mysql:host=%s;dbname=%s;charset=%s',
-            config('host', 'localhost'),
-            config('dbname', 'parqueadero-system'),
-            config('charset')
-        );
-
-        // var_dump($dsn); die();
-
-        $this->connection = new PDO($dsn, config('username'), config('password'), config('options', []));
+        $host = $_ENV['DB_HOST'] ?? 'localhost';
+        $port = $_ENV['DB_PORT'] ?? 3306;
+        $dbname = $_ENV['DB_NAME'] ?? 'parqueadero_system';
+        $user = $_ENV['DB_USER'] ?? 'root';
+        $pass = $_ENV['DB_PASS'] ?? '';
+    
+        $dsn = "mysql:host=$host;port=$port;dbname=$dbname;charset=utf8mb4";
+    
+        $this->connection = new PDO($dsn, $user, $pass, [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        ]);
     }
 
     public function query($sql, $params = [])
