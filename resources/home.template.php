@@ -555,7 +555,7 @@
                 <div class="mapa-espacios-bg" style="width: 100%; max-width: 900px; margin: 0 auto;">
                     <div id="mapa-moto-grande-grid" style="display: flex; flex-direction: column; align-items: center;">
                         <a class="mapa-titulo">Parqueadero tercer piso</a> 
-                        <div id="mapa-espacios-carro">
+                        <div id="mapa-espacios-moto-grande">
                             <?php for ($i = 272; $i >= 270; $i--): ?>
                                 <?php
                                     $estado = 'disponible';
