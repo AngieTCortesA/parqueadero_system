@@ -305,8 +305,8 @@
             const subtitle = document.getElementById('carousel-subtitle');
 
             const subtitles = [
-                "Parqueadero tercer piso",
-                "Parqueadero segundo piso"
+                "Parqueadero 3",
+                "Parqueadero 2"
             ];
 
             let currentIndex = 0;
