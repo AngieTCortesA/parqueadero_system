@@ -449,7 +449,7 @@
                 </div>
                 <div class="mapa-espacios-bg" style="width: 100%; max-width: 900px; margin: 0 auto;">
                     <div id="mapa-carros-grid" style="display: flex; flex-direction: column; align-items: center;">
-                        <a class="mapa-titulo">Parqueadero tercer piso</a>
+                        <a class="mapa-titulo">Parqueadero 3</a>
                         <div id="mapa-espacios-carro">
                             <?php for ($i = 281; $i >= 273; $i--): ?>
                                 <?php
@@ -487,7 +487,7 @@
                 <div class="mapa-espacios-bg" style="width: 100%; max-width: 800px; margin: 0 auto;">
                    <div id="mapa-motos-grid" style="display: flex; flex-direction: column; align-items: center; gap: 21px;">
                         <div style="background: rgba(0, 0, 0, 0.02); width: 80%; border-radius: 18px; padding: 18px 80px; display: inline-block;">
-                            <a class="mapa-titulo">Parqueadero tercer piso</a>
+                            <a class="mapa-titulo">Parqueadero 3</a>
                             <div style="display: flex; gap: 83px; margin-bottom: 10px;">
                                 <?php foreach ([474, 475, 476] as $id): ?>
                                     <?php
@@ -520,7 +520,7 @@
 
                         <!-- Contenedor 001 y 002 -->
                         <div style="background: rgba(0,0,0,0.02); width: 80%; border-radius: 18px; padding: 18px 80px; display: inline-block;">
-                            <a class="mapa-titulo">Parqueadero segundo piso</a>
+                            <a class="mapa-titulo">Parqueadero 2</a>
                             <div style="display: flex; gap: 83px;">
                                 <?php foreach (['001' => 5, '002' => 5] as $id => $max): ?>
                                     <?php
@@ -554,7 +554,7 @@
                 </div>
                 <div class="mapa-espacios-bg" style="width: 100%; max-width: 900px; margin: 0 auto;">
                     <div id="mapa-moto-grande-grid" style="display: flex; flex-direction: column; align-items: center;">
-                        <a class="mapa-titulo">Parqueadero tercer piso</a> 
+                        <a class="mapa-titulo">Parqueadero 3</a> 
                         <div id="mapa-espacios-moto-grande">
                             <?php for ($i = 272; $i >= 270; $i--): ?>
                                 <?php
