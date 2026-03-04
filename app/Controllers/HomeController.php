@@ -136,7 +136,8 @@ class HomeController
                             IFNULL(u.s_nombre, ""), " ",
                             u.p_apellido, " ",
                             IFNULL(u.s_apellido, "")
-                        ) AS nombres
+                        ) AS nombres,
+                        u.email
                      FROM reservas r
                      INNER JOIN usuarios u ON r.usuario_id = u.id
                      WHERE r.fecha_reserva = :fecha
